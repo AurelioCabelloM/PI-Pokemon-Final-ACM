@@ -1,11 +1,24 @@
-// client/src/components/Card/Card.jsx
+//client/src/components/Card/Card.jsx
 import React from 'react';
 
-const Card = ({ name, id}) => (
-  <div className="card-container">
-    <h2>Name: {name}</h2>
-    <p>id: {id} </p>
-  </div>
-);
+const Card = ({ image, name, types, attack, hp, id }) => {
+  return (
+    <div key={id}>
+      <div>
+        <h2>{name}</h2>
+        <h5>Hp: {hp}</h5>
+        <h5>Attack: {attack}</h5>
+      </div>
+      <div>
+        <img src={image} alt={name} />
+        <div>
+          {types.map((e, index) => (
+            <p key={index}>{e}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Card;
