@@ -20,9 +20,6 @@ const Home = () => {
     <div className='home'>
       <h1 className='home-title'>Home</h1>
       <NavBar />
-      {pokemons.data.map((pokemon) => (
-        <Card  name={pokemon.name} id={pokemon.id} />
-      ))}
       
 
     </div>
