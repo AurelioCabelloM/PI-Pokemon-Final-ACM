@@ -13,7 +13,7 @@ const Navbar = () => {
       </Link>
       <div>
         <Link to={"/home"}>Home</Link>
-        <Link to={"/create"}>Crearte</Link>
+        <Link to={"/create"}>Crea tu propio Pokemon!</Link>
       </div>
       <SearchBar />
     </div>

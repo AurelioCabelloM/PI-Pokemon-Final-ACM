@@ -1,3 +1,4 @@
+//api/src/routes/typesRouters.js
 const { Router } = require("express");
 const {getTypesHandler}=require("../handlers/typesHandlers");
 const routerTy = Router();

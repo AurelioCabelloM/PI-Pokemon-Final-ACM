@@ -1,3 +1,4 @@
+//api/src/routes/index.js
 const { Router } = require("express");
 const pokemonsRouter = require("./pokemonsRouter");
 const typesRouter = require("./typesRouters");

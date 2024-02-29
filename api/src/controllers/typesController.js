@@ -1,3 +1,4 @@
+//api/src/controllers/typesController.js
 const { Type } = require("../db");
 const axios = require("axios");
 
@@ -19,3 +20,4 @@ const getTypesApi = async () => {
 module.exports = {
   getTypesApi
 };
+

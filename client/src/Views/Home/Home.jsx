@@ -1,18 +1,8 @@
-//client/src/Views/Home/Home.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getPokemons,
-  filterCreated,
-  getTypes,
-  orderByName,
-  orderByAttack,
-  filterByType,
-  orderByHp
-} from "../../redux/actions";
+import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filterByType, orderByHp } from "../../redux/actions";
 import { Link } from "react-router-dom";
-import Card from "../../Components/Card/Card";
-import Pagination from "../../components/pagination/pagination";
+import Card from "../../components/Card/Card";
 import Navbar from "../../components/NavBar/Navbar";
 
 const Home = () => {
@@ -22,13 +12,10 @@ const Home = () => {
   const notFound = useSelector((state) => state.notFound);
   const [, setOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage,] = useState(12);
+  const [pokemonsPerPage] = useState(20);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = allPokemons.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
-  );
+  const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -81,83 +68,52 @@ const Home = () => {
     <div>
       <Navbar />
       <div>
-        <button
-          onClick={(e) => {
-            handleClick(e);
-          }}
-        >
-          Recargar
-        </button>
+        <button onClick={(e) => handleClick(e)}>Recargar</button>
         <select onChange={(e) => handleSort(e)}>
           <option value="asc">A - Z</option>
           <option value="des">Z - A</option>
         </select>
-        <select
-          onChange={(e) => handleFilterTypes(e)}
-        >
+        <select onChange={(e) => handleFilterTypes(e)}>
           <option>Tipos</option>
           <option value="All">Todos</option>
-          {allTypes?.map((e) => {
-            return (
-              <option key={e.id} value={e.name}>
-                {e.name}
-              </option>
-            );
-          })}
+          {allTypes?.map((e) => (
+            <option key={e.id} value={e.name}>
+              {e.name}
+            </option>
+          ))}
         </select>
-        <select
-          onChange={(e) => handleSortAttack(e)}
-        >
+        <select onChange={(e) => handleSortAttack(e)}>
           <option value="attack">Ataque</option>
           <option value="min">min</option>
           <option value="max">max</option>
         </select>
-        <select
-          onChange={(e) => handleSortHp(e)}
-        >
+        <select onChange={(e) => handleSortHp(e)}>
           <option value="hp">hp</option>
           <option value="min">min</option>
           <option value="max">max</option>
         </select>
-        <select
-          onChange={(e) => handleFilterCreated(e)}
-        >
+        <select onChange={(e) => handleFilterCreated(e)}>
           <option value="All">Origen</option>
           <option value="created">Creados</option>
           <option value="api">Api</option>
         </select>
       </div>
-      <Pagination
-        pokemonsPerPage={pokemonsPerPage}
-        allPokemons={allPokemons.length}
-        pagination={pagination}
-        page={currentPage}
-      />
+      <pagination pokemonsPerPage={pokemonsPerPage} allPokemons={allPokemons.length} pagination={pagination} page={currentPage} />
       <div>
         {currentPokemons.length ? (
-          currentPokemons?.map((e, index) => {
-            return (
-              <Link key={index} to={`/detail/${e.id}`}>
-                <Card
-                  name={e.name}
-                  hp={e.hp}
-                  attack={e.attack}
-                  image={e.image}
-                  id={e.id}
-                  types={e.types}
-                  key={index}
-                />
-              </Link>
-            );
-          })
+          currentPokemons?.map((e, index) => (
+            <Link key={index} to={`/detail/${e.id}`}>
+              <Card name={e.name} hp={e.hp} attack={e.attack} image={e.image} id={e.id} types={e.types} key={index} />
+            </Link>
+          ))
         ) : notFound ? (
           <div>
-            <p>No existe pokemon con ese nombre</p>
+            <p>No existe Pokémon con ese nombre</p>
             <p>¿?</p>
           </div>
         ) : (
           <div>
-            <p>cargando...</p>
+            <p>Cargando...</p>
           </div>
         )}
       </div>

@@ -21,7 +21,7 @@ const SearchBar = () => {
     <div>
       <input
         type="text"
-        placeholder="Pokedex..."
+        placeholder="Encuentra Pokemons"
         onChange={(e) => handleInputChange(e)}
       />
       <button type="submit" onClick={(e) => handleSubmit(e)}>

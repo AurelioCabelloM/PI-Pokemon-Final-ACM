@@ -1,9 +1,10 @@
+//api/src/controllers/pokemonsController.js
 const { Pokemon, Type } = require("../db");
 const axios = require("axios");
 
 const getPokemonsApi = async () => {
   try {
-    const api = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=200");
+    const api = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=151");
 
     const pokeApi = await api.data.results; //guardo la info en una constante para luego mapear y modificar segun la info de la url
 
