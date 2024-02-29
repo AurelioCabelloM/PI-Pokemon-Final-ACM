@@ -4,6 +4,7 @@ import { createPokemons, getTypes } from "../../redux/actions";
 import { useEffect } from "react";
 import Validate from "../../components/Validate/validate";
 import { Link } from "react-router-dom";
+import "./Create.css"
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -88,15 +89,13 @@ const Create = () => {
   };
 
   return (
-    <div>
-      <Link to={"/home"}>
+    <div className="create-container" >
+      <Link to={"/home"} className="button-volver" >
         <button>
           Volver
         </button>
       </Link>
-      <div>
-        
-      </div>
+      <div className="create-form" >     
       <form onSubmit={(e) => handleSubmit(e)}>
   <h3>Crea un pokemon</h3>
   <div>
@@ -233,8 +232,9 @@ const Create = () => {
       </button>
     </div>
   </div>
-</form>
-      <div>
+ </form>
+</div>
+      <div className="create-types" >
         {input.types.map((e, index) => (
           <div key={index}>
             <p>{e}</p>

@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDetail, clearDetail } from "../../redux/actions";
+import "./Detail.css"
 
 const Detail = () => {
   let { id } = useParams();
@@ -18,18 +19,15 @@ const Detail = () => {
 
 
   return (
-    <div>
-      <Link to={"/home"}>
+    <div className="detail-container" >
+      <Link to={"/home"} className="button-container" >
         <button>
           <span>Volver</span>
         </button>
       </Link>
-      {detailPokemons.length > 0 ? (
-        <div>
-          <div
-            
-          >
-            <div>
+      {detailPokemons.length > 0 ? (       
+          <div className="detail-box" >
+            <div className="detail-info" >
               <img
                 src={detailPokemons[0]?.image}
                 alt={detailPokemons[0].name}
@@ -75,7 +73,7 @@ const Detail = () => {
               </div>
             </div>
           </div>
-        </div>
+        
       ) : (
         <div>
           <p>cargando...</p>

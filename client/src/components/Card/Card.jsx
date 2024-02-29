@@ -1,9 +1,10 @@
 //client/src/components/Card/Card.jsx
 import React from 'react';
+import "./Card.css"
 
 const Card = ({ image, name, types, id }) => {
   return (
-    <div key={id}>
+    <div className='card' key={id}>
       <div>
         <h2>{name}</h2>
         

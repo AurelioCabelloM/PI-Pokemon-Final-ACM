@@ -4,6 +4,8 @@ import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filte
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import Navbar from "../../components/NavBar/Navbar";
+import "./Home.css"
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -11,15 +13,16 @@ const Home = () => {
   const allTypes = useSelector((state) => state.types);
   const notFound = useSelector((state) => state.notFound);
   const [, setOrden] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage] = useState(20);
+  const [pokemonsPerPage] = useState(10);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
-  const pagination = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  // const pagination = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -65,15 +68,15 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="home-container" >
       <Navbar />
-      <div>
-        <button onClick={(e) => handleClick(e)}>Recargar</button>
-        <select onChange={(e) => handleSort(e)}>
+      <div className="filters-container" >
+        <button onClick={(e) => handleClick(e)} className="filter-button" >Recargar</button>
+        <select onChange={(e) => handleSort(e)} className="filter-button" >
           <option value="asc">A - Z</option>
           <option value="des">Z - A</option>
         </select>
-        <select onChange={(e) => handleFilterTypes(e)}>
+        <select onChange={(e) => handleFilterTypes(e)} className="filter-button" >
           <option>Tipos</option>
           <option value="All">Todos</option>
           {allTypes?.map((e) => (
@@ -82,27 +85,27 @@ const Home = () => {
             </option>
           ))}
         </select>
-        <select onChange={(e) => handleSortAttack(e)}>
+        <select onChange={(e) => handleSortAttack(e)} className="filter-button" >
           <option value="attack">Ataque</option>
           <option value="min">min</option>
           <option value="max">max</option>
         </select>
-        <select onChange={(e) => handleSortHp(e)}>
+        <select onChange={(e) => handleSortHp(e)} className="filter-button" >
           <option value="hp">hp</option>
           <option value="min">min</option>
           <option value="max">max</option>
         </select>
-        <select onChange={(e) => handleFilterCreated(e)}>
+        <select onChange={(e) => handleFilterCreated(e)} className="filter-button" >
           <option value="All">Origen</option>
           <option value="created">Creados</option>
           <option value="api">Api</option>
         </select>
       </div>
-      <pagination pokemonsPerPage={pokemonsPerPage} allPokemons={allPokemons.length} pagination={pagination} page={currentPage} />
-      <div>
+      
+      <div className="card-container" >
         {currentPokemons.length ? (
           currentPokemons?.map((e, index) => (
-            <Link key={index} to={`/detail/${e.id}`}>
+            <Link key={index} to={`/detail/${e.id}`} className="card" >
               <Card name={e.name} hp={e.hp} attack={e.attack} image={e.image} id={e.id} types={e.types} key={index} />
             </Link>
           ))
