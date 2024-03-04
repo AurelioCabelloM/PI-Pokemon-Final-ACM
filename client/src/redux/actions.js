@@ -1,19 +1,17 @@
 //client/src/redux/actions.js
 import axios from "axios";
 
-//ACTIONS-TYPES
 export const GET_POKEMONS = "GET_POKEMONS";
 export const FILTER_CREATED = "FILTER_CREATED";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const GET_NAME_POKEMONS = "GET_NAME_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
-export const ORDER_BY_HP = "ORDER_BY_HP";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
-//ACTIONS
+
 export const getPokemons = () => {
   return async (dispatch) => {
     try {
@@ -32,8 +30,7 @@ export const createPokemons = (info) => {
         "http://localhost:3001/pokemons/create",
         info
       );
-      //console.log(response);
-      alert("Pokemon creado, Gran trabajo!");
+      alert("Pokemon creado, Ve a la pagina de Home para visualizarlo!");
       return response;
     } catch (error) {
       console.error(error);
@@ -116,9 +113,3 @@ export const clearDetail = () => {
   };
 };
 
-export const orderByHp = (payload) => {
-  return {
-    type: ORDER_BY_HP,
-    payload,
-  };
-};

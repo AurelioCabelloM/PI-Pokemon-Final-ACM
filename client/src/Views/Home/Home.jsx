@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filterByType, orderByHp } from "../../redux/actions";
+import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filterByType } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import Navbar from "../../components/NavBar/Navbar";
+import Pagination from "../../components/pagination/pagination";
 import "./Home.css"
 
 
@@ -13,16 +14,15 @@ const Home = () => {
   const allTypes = useSelector((state) => state.types);
   const notFound = useSelector((state) => state.notFound);
   const [, setOrden] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage] = useState(10);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
-  // const pagination = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
+  const pagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -48,9 +48,10 @@ const Home = () => {
 
   const handleSortAttack = (e) => {
     e.preventDefault();
-    if (e.target.value !== "attack") dispatch(orderByAttack(e.target.value));
+    if (e.target.value !== "attack") {
+    dispatch(orderByAttack(e.target.value));
     setCurrentPage(1);
-    setOrden(`Ordenado ${e.target.value}`);
+    setOrden(`Ordenado ${e.target.value}`);}
   };
 
   const handleFilterTypes = (e) => {
@@ -60,12 +61,9 @@ const Home = () => {
     }
   };
 
-  const handleSortHp = (e) => {
-    e.preventDefault();
-    if (e.target.value !== "jp") dispatch(orderByHp(e.target.value));
-    setCurrentPage(1);
-    setOrden(`Ordenado ${e.target.value}`);
-  };
+  
+
+  
 
   return (
     <div className="home-container" >
@@ -90,18 +88,18 @@ const Home = () => {
           <option value="min">min</option>
           <option value="max">max</option>
         </select>
-        <select onChange={(e) => handleSortHp(e)} className="filter-button" >
-          <option value="hp">hp</option>
-          <option value="min">min</option>
-          <option value="max">max</option>
-        </select>
         <select onChange={(e) => handleFilterCreated(e)} className="filter-button" >
           <option value="All">Origen</option>
           <option value="created">Creados</option>
           <option value="api">Api</option>
         </select>
       </div>
-      
+      <Pagination
+        pokemonsPerPage={pokemonsPerPage}
+        allPokemons={allPokemons.length}
+        pagination={pagination}
+        page={currentPage}
+      />
       <div className="card-container" >
         {currentPokemons.length ? (
           currentPokemons?.map((e, index) => (
@@ -112,12 +110,12 @@ const Home = () => {
         ) : notFound ? (
           <div>
             <p>No existe Pokémon con ese nombre</p>
-            <p>¿?</p>
           </div>
         ) : (
           <div>
             <p>Cargando...</p>
           </div>
+          
         )}
       </div>
     </div>

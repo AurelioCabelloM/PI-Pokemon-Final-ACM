@@ -4,11 +4,11 @@
   align-items: center;
   background-color: #272121;
   padding: 10px 20px;
-  width: 100%; /* Ancho del 100% para ocupar todo el ancho de la pantalla */
-  position: fixed; /* Fija la barra de navegación en la parte superior */
-  top: 0; /* Sitúa la barra en la parte superior de la pantalla */
+  width: 100%; 
+  position: fixed; 
+  top: 0; 
   left: 0;
-  z-index: 1000; /* Asegura que la barra de navegación esté en la parte superior de otros elementos */
+  z-index: 1000; 
 }
 
 .logo-container {

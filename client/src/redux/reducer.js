@@ -9,7 +9,6 @@ import {
     GET_TYPES,
     GET_DETAIL,
     CLEAR_DETAIL,
-    ORDER_BY_HP
   } from "./actions";
   
   let initialState = {
@@ -120,22 +119,7 @@ import {
         return {
           ...state,
           detail: {},
-        };
-  
-      case ORDER_BY_HP:
-        let sortedHp = [...state.allPokemons];
-  
-        if (action.payload === "min") {
-          sortedHp.sort((a, b) => a.hp - b.hp);
-        }
-        if (action.payload === "max") {
-          sortedHp.sort((a, b) => b.hp - a.hp);
-        }
-        return {
-          ...state,
-          pokemons: sortedHp,
-        };
-  
+        }; 
       default:
         return { ...state };
     }

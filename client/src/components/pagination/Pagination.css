@@ -1,4 +1,4 @@
-.buttonP {
+.button-p {
     --size: 32px;
     --margin: 6px;
     margin: 0 var(--margin);
@@ -22,3 +22,26 @@
     justify-content: center;
   }
   
+  .pagination button {
+    border: none;
+    padding: 8px;
+    margin: 4px;
+    border-radius: 5px;
+    background: whitesmoke;
+    color: rgb(45, 85, 55);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 3px 8px 12px,
+      rgba(0, 0, 0, 0.3) 5px 1px 10px 3px, rgba(1, 0, 0, 0.2) 0px -1px 2px inset;
+  }
+  
+  .pagination button.active {
+    background: darkgrey;
+    color: white;
+  }
+
+  .pagination ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }

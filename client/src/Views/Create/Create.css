@@ -72,7 +72,9 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0px;
+    border: 3px;
+    background-color: white;
   }
   
   .create-types div {
@@ -86,7 +88,7 @@
   .create-types button {
     background-color: #e74c3c;
     color: white;
-    border: none;
+    border: 1px;
     border-radius: 5px;
     cursor: pointer;
   }

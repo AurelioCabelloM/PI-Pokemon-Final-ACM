@@ -234,6 +234,8 @@ const Create = () => {
   </div>
  </form>
 </div>
+
+
       <div className="create-types" >
         {input.types.map((e, index) => (
           <div key={index}>

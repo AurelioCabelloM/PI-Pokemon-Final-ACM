@@ -1,4 +1,5 @@
 import React from "react";
+import "./Pagination.css"
 
 export default function Pagination({
   pokemonsPerPage,
@@ -13,21 +14,15 @@ export default function Pagination({
   }
 
   return (
-    <nav>
+    <nav className="pagination" >
       <ul>
         {pageNumbers &&
           pageNumbers.map((number, index) => (
             <li
               key={index}
-              style={{ listStyle: "none" }}
             >
               <button
-                
-                style={
-                  page === number
-                    ? { color: 'white' , background: "darkgrey" }
-                    : {}
-                }
+                className="button-p"
                 onClick={() => pagination(number)}
               >
                 {number}

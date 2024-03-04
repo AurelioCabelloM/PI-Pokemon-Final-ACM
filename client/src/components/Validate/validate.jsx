@@ -9,7 +9,12 @@ const Validate = (input) => {
     if (input.name.length > 10) {
       errors.name = "Debe ser menor a 10 carácteres";
     }
-  
+    
+    if (!/^[a-zA-Z]+$/.test(input.name)) {
+      errors.name = "El nombre solo puede contener letras";
+    }
+    
+
     if (!regexImage.test(input.image)) errors.image = "Ingresa una url valida";
     if (!input.image) errors.image = "La imagen no puede estar vacia";
   
