@@ -9,7 +9,6 @@ const getTypesApi = async () => {
   const resultApi = await infoApi.data.results;
 
   resultApi.map((e) => allTypes.push(e.name));
-  //extraigo los typos y lo guardo en el arreglo types
   await Promise.all(
     allTypes.map((type) => Type.findOrCreate({ where: { name: type } }))
   );

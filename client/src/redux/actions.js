@@ -10,6 +10,7 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const ORDER = "ORDER"
 
 
 export const getPokemons = () => {

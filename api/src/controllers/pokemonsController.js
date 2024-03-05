@@ -6,7 +6,7 @@ const getPokemonsApi = async () => {
   try {
     const api = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=151");
 
-    const pokeApi = await api.data.results; //guardo la info en una constante para luego mapear y modificar segun la info de la url
+    const pokeApi = await api.data.results; 
 
     const dataPokemon = pokeApi.map(async (pokemon) => {
       const info = await axios.get(pokemon.url);
@@ -34,13 +34,12 @@ const getPokemonsApi = async () => {
 
 const getPokemonsDb = async () => {
   const allPokemonsDb = await Pokemon.findAll({
-    //busco en la tabla los modelos que necesito
     include: {
       model: Type,
       atributes: ["name"],
     },
   });
-  const mapPoke = allPokemonsDb.map((e) => {
+  const mapPokemons = allPokemonsDb.map((e) => {
     return {
       id: e.id,
       name: e.name,
@@ -55,11 +54,10 @@ const getPokemonsDb = async () => {
       createdInDb: e.createdInDb,
     };
   });
-  return mapPoke;
+  return mapPokemons;
 };
 
 const getAllPokemons = async (name) => {
-  //console.log('estoy en el controller', name);
   const pokemonsDb = await getPokemonsDb();
   const pokemonsApi = await getPokemonsApi();
   const allPokemon = pokemonsDb.concat(pokemonsApi);
@@ -77,9 +75,9 @@ const getAllPokemons = async (name) => {
 
 const getPokemonsById = async (idPokemon) => {
   const all = await getAllPokemons();
-  const byId = await all.filter((e) => String(e.id) === idPokemon);
-  if (byId.length) {
-    return byId;
+  const Id = await all.filter((e) => String(e.id) === idPokemon);
+  if (Id.length) {
+    return Id;
   } else {
     throw new Error(`Pokemon no encontrado, id: ${idPokemon} incorrecto`);
   }
