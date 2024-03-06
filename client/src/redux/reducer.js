@@ -49,15 +49,38 @@ import {
           ...state,
           types: action.payload,
         };
-      case FILTER_CREATED:
-        const createdFilter =
-          action.payload === "created"
+        case FILTER_CREATED:
+          const createdFilter = action.payload === "created"
             ? state.allPokemons.filter((e) => e.createdInDb)
             : state.allPokemons.filter((e) => !e.createdInDb);
-        return {
-          ...state,
-          pokemons: action.payload === "All" ? state.allPokemons : createdFilter,
-        };
+        
+          let filteredPokemons = action.payload === "All" ? state.allPokemons : createdFilter;
+        
+          if (state.filterTypeValue !== "All") {
+            filteredPokemons = filteredPokemons.filter((e) =>
+              e.types.includes(state.filterTypeValue)
+            );
+          }
+        
+          if (state.orderBy === "name") {
+            filteredPokemons.sort((a, b) => {
+              const nameA = a.name.toLowerCase();
+              const nameB = b.name.toLowerCase();
+              return state.order === "asc" ? (nameA > nameB ? 1 : -1) : (nameB > nameA ? 1 : -1);
+            });
+          } else if (state.orderBy === "attack") {
+            if (state.order === "min") {
+              filteredPokemons.sort((a, b) => a.attack - b.attack);
+            } else if (state.order === "max") {
+              filteredPokemons.sort((a, b) => b.attack - a.attack);
+            }
+          }
+        
+          return {
+            ...state,
+            pokemons: filteredPokemons,
+          };
+          
         case ORDER_BY_NAME:
           let sortedName =
             action.payload === "asc"
