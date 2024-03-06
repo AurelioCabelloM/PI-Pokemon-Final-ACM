@@ -16,7 +16,8 @@ import {
     allPokemons: [],
     types: [],
     detail: {},
-    notFound: false
+    notFound: false,
+    filterTypeValue: "All",
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -57,64 +58,54 @@ import {
           ...state,
           pokemons: action.payload === "All" ? state.allPokemons : createdFilter,
         };
-      case ORDER_BY_NAME:
-        let sortedAll =
-          action.payload === "asc"
-            ? state.pokemons.sort((a, b) => {
-                if (a.name > b.name) {
-                  return 1;
-                }
-                if (b.name > a.name) {
-                  return -1;
-                }
-                return 0;
-              })
-            : state.pokemons.sort((a, b) => {
-                if (a.name > b.name) {
-                  return -1;
-                }
-                if (b.name > a.name) {
-                  return 1;
-                }
-                return 0;
-              });
-        return {
-          ...state,
-          pokemons: sortedAll,
-        };
+        case ORDER_BY_NAME:
+          let sortedName =
+            action.payload === "asc"
+              ? state.pokemons.sort((a, b) => (a.name > b.name ? 1 : -1))
+              : state.pokemons.sort((a, b) => (a.name > b.name ? -1 : 1));
+          return {
+            ...state,
+            pokemons: sortedName,
+          };
   
-      case ORDER_BY_ATTACK:
-        let sortedAttack = [...state.allPokemons];
-  
-        if (action.payload === "min") {
-          sortedAttack.sort((a, b) => a.attack - b.attack);
-        }
-        if (action.payload === "max") {
-          sortedAttack.sort((a, b) => b.attack - a.attack);
-        }
-        return {
-          ...state,
-          pokemons: sortedAttack,
-        };
-  
-      case FILTER_BY_TYPE:
-        let filterType;
-        if (action.payload === "All") {
-          filterType = state.allPokemons;
-        } else {
-          filterType = state.allPokemons.filter((e) =>
-            e.types.includes(action.payload)
-          );
-        }
-        return {
-          ...state,
-          pokemons: filterType,
-        };
+        case ORDER_BY_ATTACK:
+          let sortedAttack =
+            action.payload === "min"
+              ? state.pokemons.sort((a, b) => a.attack - b.attack)
+              : action.payload === "max"
+              ? state.pokemons.sort((a, b) => b.attack - a.attack)
+              : [...state.allPokemons];
+    
+          let filteredByType =
+            state.filterTypeValue === "All"
+              ? sortedAttack
+              : sortedAttack.filter((e) => e.types.includes(state.filterTypeValue));
+    
+          return {
+            ...state,
+            pokemons: filteredByType,
+          };
+
+      
+        case FILTER_BY_TYPE:
+          let filterType =
+            action.payload === "All"
+              ? state.allPokemons
+              : state.allPokemons.filter((e) => e.types.includes(action.payload));
+          return {
+            ...state,
+            pokemons: filterType,
+            filterTypeValue: action.payload,
+          };
+
+
       case GET_DETAIL:
         return {
           ...state,
           detail: action.payload,
         };
+
+        
       case CLEAR_DETAIL:
         return {
           ...state,

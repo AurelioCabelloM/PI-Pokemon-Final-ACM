@@ -1,6 +1,7 @@
+//client/src/Views/Home
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filterByType } from "../../redux/actions";
+import { getPokemons, filterCreated, getTypes, orderByName, orderByAttack, filterByType, } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import Navbar from "../../components/NavBar/Navbar";
@@ -41,15 +42,11 @@ const Home = () => {
     setOrden(`Ordenado ${e.target.value}`);
   };
 
-  const handleFilterCreated = (e) => {
-    e.preventDefault();
-    dispatch(filterCreated(e.target.value));
-  };
-
+  
   const handleSortAttack = (e) => {
     e.preventDefault();
     if (e.target.value !== "attack") {
-    dispatch(orderByAttack(e.target.value));
+      dispatch(orderByAttack(e.target.value));
     setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);}
   };
@@ -61,7 +58,11 @@ const Home = () => {
     }
   };
 
-  
+  const handleFilterCreated = (e) => {
+    e.preventDefault();
+    dispatch(filterCreated(e.target.value));
+  };
+
 
   
 
@@ -74,6 +75,12 @@ const Home = () => {
           <option value="asc">A - Z</option>
           <option value="des">Z - A</option>
         </select>
+        <select onChange={(e) => handleSortAttack(e)} className="filter-button" >
+          <option value="attack">Ataque</option>
+          <option value="min">min</option>
+          <option value="max">max</option>
+        </select>
+
         <select onChange={(e) => handleFilterTypes(e)} className="filter-button" >
           <option>Tipos</option>
           <option value="All">Todos</option>
@@ -82,11 +89,6 @@ const Home = () => {
               {e.name}
             </option>
           ))}
-        </select>
-        <select onChange={(e) => handleSortAttack(e)} className="filter-button" >
-          <option value="attack">Ataque</option>
-          <option value="min">min</option>
-          <option value="max">max</option>
         </select>
         <select onChange={(e) => handleFilterCreated(e)} className="filter-button" >
           <option value="All">Origen</option>
