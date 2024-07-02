@@ -20,7 +20,7 @@ const Home = () => {
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
-
+  console.log(allPokemons)
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

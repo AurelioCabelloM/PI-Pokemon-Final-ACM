@@ -84,8 +84,8 @@ import {
         case ORDER_BY_NAME:
           let sortedName =
             action.payload === "asc"
-              ? state.pokemons.sort((a, b) => (a.name > b.name ? 1 : -1))
-              : state.pokemons.sort((a, b) => (a.name > b.name ? -1 : 1));
+              ? state.pokemons.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
+              : state.pokemons.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1));
           return {
             ...state,
             pokemons: sortedName,
